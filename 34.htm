@@ -1,0 +1,56 @@
+﻿<html>
+<head>
+    <script>
+        //__________________________________Crear algun texto de XML
+        var text = "<client_list>";
+        text += "<client_name>John Miller</client_name>";
+        text += "<age>25</age>";
+        text += "</client>";
+        text += "<client>";
+        text += "<client_name>Mary Young</client_name>";
+        text += "<age>75</age>";
+        text += "<client>";
+        text += "</client>";
+        text += "<client_list>";
+        //___________________________________Convertir de texto a XML
+        var xmlDoc = null;
+        if(window.DOMParser !=null)
+        {
+            var parser = new DOMParser();
+            xmlDoc = parser.parseFromString(text,"text/xml");
+        }
+        else //Internet Explorer
+        {
+            var xmlDoc = new ActiveXObject("Microsoft.XMLDOM");
+            xmlDoc.async = false;
+            xmlDoc.loadXML(text);
+        }
+        //____________________________________Mover los nodos
+        var client_list = xmlDoc.documentElement;
+        var client = client_list.childNodes;
+        //var client= client_list.getElementsByTagName("client");
+        var count = client.length;
+        var i = 0;
+        var client_name;
+        var age;
+        var result = "Number of child nodes=" + count + "<br/>";
+        for(i=0;i<count;i++)
+        {
+            client_name = client[i].getElementsByTagName("client_name");
+            age = client[i].getElementsByTagName("age");
+            try
+            {
+                result +=client_name[0].firstChild.nodeValue+", ";
+                result +=age[0].firstChild.nodeValue+ "<br/>";
+            }
+            catch (errorInfo)
+            {
+                continue;
+            }
+        }
+        document.write(result); 
+    </script>
+</head>
+<body>
+</body>
+</html>

@@ -1,0 +1,80 @@
+//_______________________________________________________________MayorJ
+
+import java.awt.*;
+import javaawt.event.*;
+import javax.swing.*;
+
+    public class MayorJ extends JFrame implements ActionListener
+    {
+        private JtextField tbxInput1;
+        private JtextField tbxInput2;
+        private JtextField tbxBig;
+        private JtextField tbxSmall;
+        private JButton btSeparate;
+
+        public MayorJ()
+        {
+            this.setTitle("MayorJ");
+            //__________________________________________________Left Panel
+            JPanel panelLeft=new Jpanel();
+            panelLeft.setLayout(new GridLayout(2,2,5,5)); //rows=2, cols=2, vspace=5, hspace=5
+            panelLeft.add(new JLabel("Input 1"));
+            tbxInput1 = new JTextField(10);
+            panelLeft.add(tbxInput1);
+            //
+            panelLeft.add(new JLabel("Input 2"));
+            tbxInput2=new JTextField(10);
+            panelLeft.add(tbxInput2);
+
+            //__________________________________________________Right Panel
+            JPanel panelRight=new Jpanel();
+            panelRight.setLayout(new GridLayout(2,2,5,5)); //rows=2, cols=2, vspace=5, hspace=5
+            panelRight.add(new JLabel("Big"));
+            tbxBig = new JTextField(10);
+            panelRight.add(tbxBig);
+            //
+            panelRight.add(new JLabel("Small"));
+            tbxSmall=new JTextField(10);
+            panelRight.add(tbxSmall);
+
+            //__________________________________________________Main Panel
+            Container pane=this.getContentPane();
+            pane.setLayout(new FlowLayout());
+            pane.add(panelLeft);
+
+            //___________________________btSeparate
+            btSeparate=new JButton("Separate");
+            pane.add(btSeparate);
+            btSeparate.addActionListener(this);
+            //
+            pane.add(panelRight);
+        }
+
+        public void actionPerformed(ActionEvent e)
+        {
+            if(e.getSource()==btSeparate)
+        {
+            final double input1 = Double.parseDouble(tbxInput1.getText());
+            final double input2 = Double.parseDouble(tbxInput2.getText());
+
+            if(input1>input2)
+            {
+                tbxBig.setText(Double.toString(input2));
+                tbxSmall.setText(Double.toString(input1));
+            }
+            else
+            {
+                tbxBig.setText(Double.toString(input1));
+                tbxSmall.setText(Double.toString(input2));
+            }
+        }
+    }
+
+    public static void main(String[] args)
+    {
+    MayorJ frame = new MayorJ();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setVisible(true);
+    }
+    }

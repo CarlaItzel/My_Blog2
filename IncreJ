@@ -1,0 +1,47 @@
+//______________________________________________________ IncreJ
+
+import java.awt.*;
+import javaawt.event.*;
+import javax.swing.*;
+
+public class IncreJ extends JFrame implements ActionListener
+{
+    private JtextField tbxInput;
+    private JButton btCalculate;
+
+    public IncreJ()
+    {
+        this.setTitle("IncreJ");
+
+        Container pane=this.getContentPane();
+        pane.setLayout(new FlowLayout());
+
+        //__________________________________________________ tbxInput
+        tbxInput=new JTextField(10);
+        pane.add(tbxInput);
+        //_________________________________________________ btCalculate
+        btCalculate=new JButton("Calculate");
+        pane.add(btCalculate);
+        btCalculate.addActionListener(this);
+    }
+
+    public void actionPerformed(ActionEvent e)
+    {
+        if(e.getSource()==btCalculate)
+    {
+        final double input = Double.parseDouble(tbxInput.getText());
+        if(input>0)
+        {
+            tbxInput.setText(Double.toString(input+10.0));
+        }
+    }
+}
+
+public static void main(String[] args)
+{
+    IncreJ frame = new IncreJ();
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.pack();
+    frame.setVisible(true);
+}
+}
